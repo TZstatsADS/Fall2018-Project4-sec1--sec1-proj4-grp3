@@ -67,7 +67,7 @@ matched_pairs <- mutate(matched_pairs, class = ifelse(token == ground_t, 0, 1))
 One of the more complex features used in our model computes the how frequently the character bi-grams observed in a token occur in text that we know is correct. In order to compute this feature, the set of ground_truth documents are tokenized into character bi-grams and the bigram frequency is calculated relative to the entire corpus. This frequency is then used to compute the overall bigram frequency feature for all tokens in the tesseract and ground truth data sets. See our reference paper (paper D3) for further details, but note that our implementation differs slightly because our scaling factor is the total number of unique bi-grams in the truth corpus, rather than the value 10,000. I decided to alter our implementation because no reason was given for the use of 10,000, and our data set is considerably smaller than that used in the reference paper.
 
 ```{r char_bigrams}
-source('functions.R')
+source('../lib/functions.R')
 #create list of character bigrams frequencies from ground_truth data
 char_bigrams <- data_truth %>%
   unnest_tokens(token, text, token = "character_shingles", n = 2) %>%
